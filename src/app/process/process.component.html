@@ -1,0 +1,25 @@
+<ng-container [formGroup]="mainForm">
+  <button (click)="reset()">רענון תהליך</button>
+<span>
+  <b>מצב תביעה</b>
+  {{processStatusDesc}}
+</span>
+<span>
+  <b>תביעת על</b>
+{{superClaimNum}}
+</span>
+<app-super-claim [parentForm]="mainForm"
+                 [controlName]="'superClaim'"
+                 [insured]="process?.insured"></app-super-claim>
+<app-contacts-actions [contactsCount]="contactsCount"
+                      (actionEvent)="contactsActions($event)"></app-contacts-actions>
+<app-contacts formControlName="contactPersons"
+              [addInsured]="addInsuredSubject.asObservable()"
+              [clearForm]="clearSubject.asObservable()">
+
+</app-contacts>
+<mat-error *ngIf="mainForm.get('contactPersons').hasError('inValid')">
+  {{contsctsErrorMsg}}
+</mat-error>
+<button (click)="next()" [disabled]="!mainForm.valid">המשך</button>
+</ng-container>

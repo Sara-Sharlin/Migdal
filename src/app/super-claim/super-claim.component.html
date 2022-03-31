@@ -1,0 +1,60 @@
+<h1>ריכוז מידע בתהליך</h1>
+<app-insured-details [insured]="insured"></app-insured-details>
+<form [formGroup]="form">
+<div>
+<mat-form-field appearance="fill">
+  <mat-label>תאריך ארוע</mat-label>
+  <input matInput  [matDatepicker]="picker" formControlName="injuryDate">
+  <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+  <mat-datepicker #picker></mat-datepicker>
+</mat-form-field>
+<mat-form-field>
+  <mat-label>סוג תביעת על</mat-label>
+  <mat-select formControlName="superClaimType">
+      <mat-option *ngFor="let option of superClaimTypes" [value]="option.code" >
+          {{option.value}}
+      </mat-option>
+    </mat-select>
+</mat-form-field>
+</div>
+<div>
+  <mat-form-field>
+      <mat-label>מהות הארוע</mat-label>
+      <mat-select formControlName="injuryType" [disabled]="!claimCause">
+          <mat-option *ngFor="let option of injuryTypes" [value]="option.code" >
+              {{option.value}}
+          </mat-option>
+        </mat-select>
+    </mat-form-field>
+  <mat-form-field>
+    <mat-label>סיבת ארוע</mat-label>
+    <mat-select formControlName="claimCause">
+        <mat-option *ngFor="let option of claimCauses" [value]="option.code" >
+            {{option.value}}
+        </mat-option>
+      </mat-select>
+
+  </mat-form-field>
+  </div>
+  <div>
+    <mat-form-field>
+        <mat-label>אופן קבלת התביעה</mat-label>
+        <mat-select formControlName="submitionMethod">
+            <mat-option *ngFor="let option of submitionMethods" [value]="option.code" >
+                {{option.value}}
+            </mat-option>
+          </mat-select>
+      <p *ngIf="form.get('submittedBy').hasError('inValid')">
+        {{submittedByErrMsg}}
+      </p>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>תביעה הוגשה באמצעות</mat-label>
+      <mat-select formControlName="submittedBy">
+          <mat-option *ngFor="let option of PersonTypes" [value]="option.code" >
+              {{option.value}}
+          </mat-option>
+        </mat-select>
+    </mat-form-field>
+    </div>
+  </form>

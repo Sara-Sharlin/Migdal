@@ -1,0 +1,66 @@
+<h1>אנשי קשר</h1>
+
+<table>
+  <tr>
+    <th>מועדף</th>
+    <th>שם איש קשר</th>
+    <th>סוג</th>
+    <th>כתובת</th>
+    <th>טלפון נייד</th>
+    <th>דוא"ל</th>
+  </tr>
+  <tr *ngFor="let contact of contacts">
+    <td><input type = "checkbox" [(ngModel)]="contact.deliveryFlag" (change)="change()"></td>
+    <td>{{contact.name}}</td>
+    <td>{{contact.type}}
+    </td>
+    <td>{{contact.address}}</td>
+    <td>{{contact.phoneNumber|phone}}</td>
+    <td>{{contact.email}}</td>
+  </tr>
+  </table>
+  <form [formGroup]="form" (submit)="addContact()">
+    <table>
+  <tr *ngIf="!added">
+
+
+
+<td>
+
+ <mat-checkbox formControlName="deliveryFlag"></mat-checkbox>
+
+      <td>
+        <input id="name"   formControlName = "name">
+          <mat-error *ngIf="form.get('name').hasError('pattern')">
+            עברית בלבד
+          </mat-error>
+      </td>
+      <td>
+        <select formControlName="type">
+          <option *ngFor="let option of personTypes" [value]="option.code" >
+              {{option.value}}
+          </option>
+        </select>
+      </td>
+      <td>
+        <input formControlName = "address">
+      </td>
+      <td>
+        <input type="number" formControlName = "phoneNumber">
+        <mat-error *ngIf="form.get('phoneNumber').hasError('pattern')">
+          הזן מספר בן 10 ספרות
+        </mat-error>
+      </td>
+      <td>
+        <input formControlName = "email">
+        <mat-error *ngIf="form.get('email').hasError('email')">
+          כתובת מייל לא תקנית
+        </mat-error>
+        <button type="submit"  [disabled]="!form.valid">+</button>
+      </td>
+
+  </tr>
+
+</table>
+<button *ngIf="added" (click)="added=false">הוסף איש קשר</button>
+</form>

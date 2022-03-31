@@ -1,0 +1,33 @@
+{
+  "superClaim":  {
+    "superClaimNum": 1234,
+    "superClaimStatus": 1
+    },
+  "insured": {
+      "address": {
+          "cityName": "ירושלים",
+          "streetName": "סורוצקין"
+      },
+      "identityType": 1,
+      "age": 50,
+      "lastName": "כהן",
+      "identity": 3456789,
+      "firstName": "משה"
+  },
+  "contactPersons": [
+    {"id": 1,
+     "deliveryFlag": true,
+     "type": 1,
+     "name": "אברהם",
+     "phoneNumber": 2222222,
+     "email": "a@a.a",
+     "address": "תל אביב"},
+     {"id": 2,
+      "deliveryFlag": false,
+      "type": 2,
+      "name": "יצחק",
+      "phoneNumber": 3333333,
+      "email": "b@a.a",
+      "address": "רמת גן"}
+  ]
+}
